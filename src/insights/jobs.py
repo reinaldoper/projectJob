@@ -16,7 +16,6 @@ def read(path: str) -> List[Dict]:
 
 def get_unique_job_types(path: str) -> List[str]:
     arq = read(path)
-    print(arq)
     list_item = []
     for job in arq:
         list_item.append(job['job_type'])
