@@ -37,29 +37,58 @@ def get_min_salary(path: str) -> int:
 
 
 def matches_salary_range(job: Dict, salary: Union[int, str]) -> bool:
-    """Checks if a given salary is in the salary range of a given job
+    min_salary = job.get("min_salary", None)
+    max_salary = job.get("max_salary", None)
+    exists_salary(min_salary, max_salary)
+    salary_is_number(min_salary, max_salary)
+    salary_not_confusing(min_salary, max_salary)
+    salary_than_0(min_salary, max_salary)
+    salary_contaem_numbers(salary)
 
-    Parameters
-    ----------
-    job : dict
-        The job with `min_salary` and `max_salary` keys
-    salary : int
-        The salary to check if matches with salary range of the job
+    if int(min_salary) <= int(salary) <= int(max_salary):
+        print(True)
+        return True
+    print(False)
+    return False
 
-    Returns
-    -------
-    bool
-        True if the salary is in the salary range of the job, False otherwise
 
-    Raises
-    ------
-    ValueError
-        If `job["min_salary"]` or `job["max_salary"]` doesn't exists
-        If `job["min_salary"]` or `job["max_salary"]` aren't valid integers
-        If `job["min_salary"]` is greather than `job["max_salary"]`
-        If `salary` isn't a valid integer
-    """
-    raise NotImplementedError
+def exists_salary(min_salary, max_salary):
+    if min_salary == "" or max_salary == "":
+        raise ValueError("min e max salary necessarie")
+    else:
+        return True
+
+
+def salary_is_number(min_salary, max_salary):
+    if not str(min_salary).isdigit() or not str(max_salary).isdigit():
+        raise ValueError("salary needs to be number")
+    else:
+        return True
+
+
+def salary_than_0(min_salary, max_salary):
+    if int(min_salary) < 0 or int(max_salary) <= 0:
+        raise ValueError("salary cannot be 0")
+    else:
+        return True
+
+
+def salary_not_confusing(min_salary, max_salary):
+    if int(min_salary) > int(max_salary):
+        raise ValueError("max salary needs to be greater than min salary")
+    else:
+        return True
+
+
+def salary_contaem_numbers(salary):
+    if salary == "":
+        raise ValueError("salary necessarie")
+    if str(salary).isdigit() or (
+        str(salary)[0] == "-" and str(salary)[1:].isdigit()
+    ):
+        return True
+    else:
+        raise ValueError("entry salary needs to be numbers")
 
 
 def filter_by_salary_range(
